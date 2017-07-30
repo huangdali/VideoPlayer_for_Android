@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_player"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.ksyun.media.player.KSYTextureView
+        android:id="@+id/ksytv_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:targetApi="ice_cream_sandwich" />
+
+    <ImageView
+        android:id="@+id/iv_option_paly"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/pause" />
+
+</RelativeLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hdl.videopalyerdemo.MainActivity">
+
+    <com.hdl.vol.VedioPlayer
+        android:id="@+id/vp_player"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+
+    <SeekBar
+        android:id="@+id/sb_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:text="截图"
+        android:onClick="onScreen"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/iv_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
