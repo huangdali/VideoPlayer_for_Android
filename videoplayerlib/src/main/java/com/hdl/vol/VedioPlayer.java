@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -197,6 +198,10 @@ public class VedioPlayer extends LinearLayout {
             mTextureView.release();
             mTextureView = null;
         }
+    }
+
+    public KSYTextureView getTextureView() {
+        return mTextureView;
     }
 
     public long getCurrentPosition() {
