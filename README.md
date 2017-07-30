@@ -11,7 +11,8 @@ android端网络视频点播播放器
 
 ### 效果图
 
-[](https://github.com/huangdali/VideoPlayer_for_Android/blob/master/screenshot.png)
+![](https://github.com/huangdali/VideoPlayer_for_Android/blob/master/screenshot.png)
+
 
 ### 引入：
 
