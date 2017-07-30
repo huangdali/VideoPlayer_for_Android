@@ -10,6 +10,7 @@ android端网络视频点播播放器
 >基于 [金山云点播播放器](https://github.com/ksvc/KSYMediaPlayer_Android) 修改而来，仅仅做学习使用，请勿用于生产环境
 
 ### 效果图
+
 [](https://github.com/huangdali/VideoPlayer_for_Android/blob/master/screenshot.png)
 
 ### 引入：
