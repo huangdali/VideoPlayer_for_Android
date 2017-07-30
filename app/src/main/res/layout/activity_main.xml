@@ -7,21 +7,43 @@
     android:orientation="vertical"
     tools:context="com.hdl.videopalyerdemo.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="有默认值"
+            android:singleLine="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onChanger"
+            android:text="切换" />
+    </LinearLayout>
+
     <com.hdl.vol.VedioPlayer
         android:id="@+id/vp_player"
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="200dp" />
 
     <SeekBar
         android:id="@+id/sb_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
+
     <Button
         android:layout_width="wrap_content"
-        android:text="截图"
+        android:layout_height="wrap_content"
         android:onClick="onScreen"
-        android:layout_height="wrap_content" />
+        android:text="截图" />
+
     <ImageView
         android:id="@+id/iv_screen"
         android:layout_width="match_parent"

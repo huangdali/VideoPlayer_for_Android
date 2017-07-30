@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar sbProgress;
     private ImageView ivScreen;
     private boolean isSeekToed = true;
+    private EditText etUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ivScreen = (ImageView) findViewById(R.id.iv_screen);
         sbProgress = (SeekBar) findViewById(R.id.sb_progress);
+        etUrl = (EditText) findViewById(R.id.et_url);
         sbProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -103,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        if (vpPlayer != null) {
-            vpPlayer.runInBackground(true);
-        }
+//        if (vpPlayer != null) {
+//            vpPlayer.runInBackground(true);
+//        }
     }
 
     @Override
@@ -118,6 +121,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onScreen(View view) {
         ivScreen.setImageBitmap(vpPlayer.getScreenShot());
+    }
+
+    public void onChanger(View view) {
+        String url = etUrl.getText().toString();
+        vpPlayer.reload(url);
     }
 }
 

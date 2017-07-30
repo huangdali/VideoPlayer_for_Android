@@ -137,8 +137,32 @@ public class VedioPlayer extends LinearLayout {
         mTextureView.seekTo(curProgress);
     }
 
+    /**
+     * 获取截图
+     *
+     * @return
+     */
     public Bitmap getScreenShot() {
         return mTextureView.getScreenShot();
+    }
+
+    /**
+     * 重新加载新数据
+     *
+     * @param url
+     */
+    public void reload(String url) {
+        this.url = url;
+        mTextureView.reload(url, true);
+    }
+
+    /**
+     * 获取当前url
+     *
+     * @return
+     */
+    public String getUrl() {
+        return url;
     }
 
     /**

@@ -1,0 +1,102 @@
+# VideoPlayer_for_Android
+
+android端网络视频点播播放器
+
+- 带截图功能
+- 可后台播放
+- 提供reload方法
+
+
+>基于 [金山云点播播放器](https://github.com/ksvc/KSYMediaPlayer_Android) 修改而来，仅仅做学习使用，请勿用于生产环境
+
+### 效果图
+[](https://github.com/ksvc/KSYMediaPlayer_Android)
+
+### 引入：
+
+```java
+compile 'com.jwkj:VideoPlayer:v1.0.4'
+```
+
+### 添加混淆：
+```java
+-keep class com.hdl.vol.**{*;}
+-keep class com.ksyun.media.player.**{ *; }
+-keep class com.ksy.statlibrary.**{ *;}
+```
+
+### 播放：
+
+```java
+      vpPlayer.play(url, new OnVedioPalyerListener() {
+            @Override
+            public void onStart() {
+                mProgressDialog.show();
+                Log.e(TAG, "onStart: ");
+            }
+
+            @Override
+            public void onPrepare(long total) {
+                sbProgress.setMax((int) total);
+                Log.e(TAG, "onPrepare: ");
+                mProgressDialog.dismiss();
+            }
+
+            @Override
+            public void onError(int errorCode, Throwable errorMsg) {
+                Log.e(TAG, "onError: ");
+                mProgressDialog.dismiss();
+                Toast.makeText(MainActivity.this, "视频url失效", Toast.LENGTH_SHORT).show();
+            }
+        });
+```
+
+### 前台与后台的切换：
+```java
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (vpPlayer != null) {
+           vpPlayer.runInBackground(true);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (vpPlayer != null) {
+            vpPlayer.runInForeground();
+        }
+    }
+```
+
+### 获取截图：
+```java
+  public void onScreen(View view) {
+        ivScreen.setImageBitmap(vpPlayer.getScreenShot());
+    }
+```
+
+### reload视频源：
+```java
+ public void onChanger(View view) {
+        String url = etUrl.getText().toString();
+        vpPlayer.reload(url);
+    }
+```
+
+### 释放资源：
+```java
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        vpPlayer.stopPlay();
+        vpPlayer = null;
+    }
+```
+
+## 版本记录
+
+v1.0.4（ [2017.07.30]() ）
+
+- 【新增】获取TextureView对象
