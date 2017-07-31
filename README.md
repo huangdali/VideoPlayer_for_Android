@@ -17,7 +17,7 @@ android端网络视频点播播放器
 ### 引入：
 
 ```java
-compile 'com.jwkj:VideoPlayer:v1.0.4'
+compile 'com.jwkj:VideoPlayer:v1.0.6'
 ```
 
 ### 添加混淆：
@@ -98,6 +98,15 @@ compile 'com.jwkj:VideoPlayer:v1.0.4'
 ```
 
 ## 版本记录
+
+v1.0.6（ [2017.07.31]() ）
+
+- 【新增】暂停时回调
+- 【新增】停止播放时回调
+
+v1.0.5（ [2017.07.31]() ）
+
+- 【优化】jni库改为armeabi
 
 v1.0.4（ [2017.07.30]() ）
 

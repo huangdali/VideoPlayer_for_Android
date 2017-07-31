@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -128,6 +127,9 @@ public class VedioPlayer extends LinearLayout {
      */
     public void pausePlay() {
         mTextureView.pause();
+        if (onVedioPalyerListener != null) {
+            onVedioPalyerListener.onPuase(mTextureView.getCurrentPosition());
+        }
     }
 
     public void seekTo(long curProgress) {
@@ -218,6 +220,9 @@ public class VedioPlayer extends LinearLayout {
      * 停止播放
      */
     public void stopPlay() {
+        if (onVedioPalyerListener != null) {
+            onVedioPalyerListener.onStop();
+        }
         if (mTextureView != null) {
             mTextureView.release();
             mTextureView = null;

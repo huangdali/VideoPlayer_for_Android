@@ -77,6 +77,16 @@ public class MainActivity extends AppCompatActivity {
                 mProgressDialog.dismiss();
                 Toast.makeText(MainActivity.this, "视频url失效", Toast.LENGTH_SHORT).show();
             }
+
+            @Override
+            public void onPuase(long currProgress) {
+
+            }
+
+            @Override
+            public void onStop() {
+
+            }
         });
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
