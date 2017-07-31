@@ -120,6 +120,9 @@ public class VedioPlayer extends LinearLayout {
      */
     public void startPlay() {
         mTextureView.start();
+        if(onVedioPalyerListener!=null){
+            onVedioPalyerListener.onStartPaly();
+        }
     }
 
     /**
