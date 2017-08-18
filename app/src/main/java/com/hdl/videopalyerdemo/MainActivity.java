@@ -21,7 +21,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private VedioPlayer vpPlayer;
-    private String url = "http://gwell-oss-test1.oss-cn-shenzhen.aliyuncs.com/video-123yun/2017-07-20%2017%3A00%3A00.m3u8?Expires=1501502790&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=MfjA%2FuD7pWmoVXUgO3Uwn0YiOQU%3D";
+    private String url = "http://oss.cloudlinks.cn/video-123yun/1500541859093.m3u8?Expires=1503109645&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=Ucr3V5yqQYgkX8oZ%2F6uosYHgCGM%3D&x-oss-process=hls%2Fsign";
     private ProgressDialog mProgressDialog;
     private SeekBar sbProgress;
     private ImageView ivScreen;
@@ -69,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
                 sbProgress.setMax((int) total);
                 Log.e(TAG, "onPrepare: ");
                 mProgressDialog.dismiss();
+            }
+
+            /**
+             * 开始播放
+             */
+            @Override
+            public void onStartPaly() {
+
             }
 
             @Override
@@ -136,6 +144,18 @@ public class MainActivity extends AppCompatActivity {
     public void onChanger(View view) {
         String url = etUrl.getText().toString();
         vpPlayer.reload(url);
+    }
+
+    public void onPlay(View view) {
+        vpPlayer.startPlay();
+    }
+
+    public void onPause(View view) {
+        vpPlayer.pausePlay();
+    }
+
+    public void onStopPlay(View view) {
+        vpPlayer.stopPlay();
     }
 }
 

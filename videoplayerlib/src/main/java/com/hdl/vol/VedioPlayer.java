@@ -26,8 +26,9 @@ public class VedioPlayer extends LinearLayout {
     private static final String TAG = "VedioPlayer";
     private Context mContext;
     private KSYTextureView mTextureView;
-    private boolean isLooping = true;
-    private boolean isPlaying = false;
+    private boolean isLooping = true;//是否循环播放
+    private boolean isPlaying = false;//是否正在播放
+    private Timer timer;
     /**
      * 播放地址
      */
@@ -58,26 +59,44 @@ public class VedioPlayer extends LinearLayout {
      */
     private void updatePlayState() {
         if (isPlaying) {
-            playSwitch.setImageResource(R.mipmap.play);
             startPlay();
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    post(new Runnable() {
-                        @Override
-                        public void run() {
-                            playSwitch.setVisibility(View.INVISIBLE);
-                        }
-                    });
-                }
-            }, 1500);
+            showPlayIcon();
         } else {
             playSwitch.setImageResource(R.mipmap.pause);
             pausePlay();
         }
     }
 
-    private boolean isClickPlayer = false;
+    /**
+     * 显示暂停图标
+     */
+    public void showPuaseIcon() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        playSwitch.setVisibility(View.VISIBLE);
+        playSwitch.setImageResource(R.mipmap.pause);
+    }
+
+    /**
+     * 显示播放图标
+     */
+    public void showPlayIcon() {
+        playSwitch.setVisibility(View.VISIBLE);
+        playSwitch.setImageResource(R.mipmap.play);
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                post(new Runnable() {
+                    @Override
+                    public void run() {
+                        playSwitch.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        }, 1500);
+    }
 
     private void initView(View view) {
         playSwitch = (ImageView) view.findViewById(R.id.iv_option_paly);
@@ -93,9 +112,13 @@ public class VedioPlayer extends LinearLayout {
         rlPlayer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                isClickPlayer = !isClickPlayer;
-                if (isClickPlayer) {
-                    playSwitch.setVisibility(View.VISIBLE);
+                if (timer != null) {
+                    timer.cancel();
+                }
+                if (isPlaying) {
+                    showPlayIcon();
+                }else {
+                    showPuaseIcon();
                 }
             }
         });
@@ -120,19 +143,22 @@ public class VedioPlayer extends LinearLayout {
      */
     public void startPlay() {
         mTextureView.start();
-        if(onVedioPalyerListener!=null){
+        if (onVedioPalyerListener != null) {
             onVedioPalyerListener.onStartPaly();
         }
+        showPlayIcon();
     }
 
     /**
      * 暂停播放
      */
     public void pausePlay() {
+        isPlaying=false;
         mTextureView.pause();
         if (onVedioPalyerListener != null) {
             onVedioPalyerListener.onPuase(mTextureView.getCurrentPosition());
         }
+        showPuaseIcon();
     }
 
     public void seekTo(long curProgress) {
@@ -230,6 +256,7 @@ public class VedioPlayer extends LinearLayout {
             mTextureView.release();
             mTextureView = null;
         }
+        showPuaseIcon();
     }
 
     public KSYTextureView getTextureView() {
@@ -237,8 +264,12 @@ public class VedioPlayer extends LinearLayout {
     }
 
     public long getCurrentPosition() {
-        return mTextureView.getCurrentPosition();
+        if (mTextureView != null) {
+            return mTextureView.getCurrentPosition();
+        }
+        return 0;
     }
+
 
     private IMediaPlayer.OnPreparedListener mOnPreparedListener = new IMediaPlayer.OnPreparedListener() {
         @Override
@@ -256,7 +287,6 @@ public class VedioPlayer extends LinearLayout {
                     });
                 }
             }, 500);
-
         }
     };
 
