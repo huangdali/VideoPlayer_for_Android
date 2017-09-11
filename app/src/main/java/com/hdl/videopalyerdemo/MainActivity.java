@@ -2,8 +2,8 @@ package com.hdl.videopalyerdemo;
 
 import android.app.ProgressDialog;
 import android.media.AudioManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -21,7 +21,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private VedioPlayer vpPlayer;
-    private String url = "http://oss.cloudlinks.cn/2222222_video-123yun/1504860794154.m3u8?Expires=1504952869&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=P0TJpZp9KldRtKaf2fveiSBvJ1g%3D&x-oss-process=hls%2Fsign";
+    private String url = "http://oss.cloudlinks.cn/2222222_video-123yun/1505101831768.m3u8?Expires=1505204793&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=Lv%2FWlbxV1mMNiZuPTb3eQ3qVFUs%3D&x-oss-process=hls%2Fsign";
     private ProgressDialog mProgressDialog;
     private SeekBar sbProgress;
     private ImageView ivScreen;
@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("加载中...");
         vpPlayer = (VedioPlayer) findViewById(R.id.vp_player);
+        vpPlayer.getTextureView().setBufferTimeMax(13.0f);
+        vpPlayer.getTextureView().setTimeout(5, 30);
         vpPlayer.play(url, new OnVedioPalyerListener() {
             @Override
             public void onStart() {

@@ -353,9 +353,9 @@ public class VedioPlayer extends LinearLayout {
                 onVedioPalyerListener.onError(ErrorCode.ERROR_CODE_URL_NOT_FOUNED, new Throwable("加载失败了"));
             }
             isPlaying = false;
-            Log.e(TAG, "onCompletion: "+what);
-            Log.e(TAG, "onCompletion: "+mp);
-            Log.e(TAG, "onCompletion: "+extra);
+            Log.e(TAG, "onCompletion: " + what);
+            Log.e(TAG, "onCompletion: " + mp);
+            Log.e(TAG, "onCompletion: " + extra);
             switch (what) {
                 //case KSYVideoView.MEDIA_ERROR_UNKNOWN:
                 // Log.e(TAG, "OnErrorListener, Error Unknown:" + what + ",extra:" + extra);

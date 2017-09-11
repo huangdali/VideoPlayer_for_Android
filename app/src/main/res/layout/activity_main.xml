@@ -54,17 +54,20 @@
             android:layout_height="wrap_content"
             android:onClick="onPlay"
             android:text="播放" />
+
         <Button
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:onClick="onPause"
-            android:layout_height="wrap_content"
             android:text="暂停" />
+
         <Button
             android:layout_width="wrap_content"
-            android:onClick="onStopPlay"
             android:layout_height="wrap_content"
+            android:onClick="onStopPlay"
             android:text="停止" />
     </LinearLayout>
+
 
     <ImageView
         android:id="@+id/iv_screen"
