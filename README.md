@@ -17,7 +17,7 @@ android端网络视频点播播放器
 ### 引入：
 
 ```java
-compile 'com.jwkj:VideoPlayer:v1.1.2'
+compile 'com.jwkj:VideoPlayer:v1.1.3'
 ```
 
 ### 添加混淆：
