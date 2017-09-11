@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 /**
  * 视频播放器
  * Created by HDL on 2017/7/28.
@@ -112,16 +113,29 @@ public class VedioPlayer extends LinearLayout {
         rlPlayer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (onVideoClickListener != null) {
+                    onVideoClickListener.onClick(isPlaying);
+                }
                 if (timer != null) {
                     timer.cancel();
                 }
                 if (isPlaying) {
                     showPlayIcon();
-                }else {
+                } else {
                     showPuaseIcon();
                 }
             }
         });
+    }
+
+    private OnVideoClickListener onVideoClickListener;
+
+    public void setOnVideoClickListener(OnVideoClickListener onVideoClickListener) {
+        this.onVideoClickListener = onVideoClickListener;
+    }
+
+    public interface OnVideoClickListener {
+        void onClick(boolean isPlaying);
     }
 
     private void initData() {
@@ -153,8 +167,10 @@ public class VedioPlayer extends LinearLayout {
      * 暂停播放
      */
     public void pausePlay() {
-        isPlaying=false;
-        mTextureView.pause();
+        isPlaying = false;
+        if (mTextureView != null) {
+            mTextureView.pause();
+        }
         if (onVedioPalyerListener != null) {
             onVedioPalyerListener.onPuase(mTextureView.getCurrentPosition());
         }
@@ -322,7 +338,10 @@ public class VedioPlayer extends LinearLayout {
         public void onCompletion(IMediaPlayer mp) {
 //            Toast.makeText(mContext, "OnCompletionListener, play complete.", Toast.LENGTH_LONG).show();
 //            videoPlayEnd();
-            Log.e(TAG, "onCompletion: ");
+//            Log.e(TAG, "onCompletion: ");
+            if (onVedioPalyerListener != null) {
+                onVedioPalyerListener.onPlayFinished();
+            }
         }
     };
 
@@ -334,7 +353,9 @@ public class VedioPlayer extends LinearLayout {
                 onVedioPalyerListener.onError(ErrorCode.ERROR_CODE_URL_NOT_FOUNED, new Throwable("加载失败了"));
             }
             isPlaying = false;
-            Log.e(TAG, "onCompletion: ");
+            Log.e(TAG, "onCompletion: "+what);
+            Log.e(TAG, "onCompletion: "+mp);
+            Log.e(TAG, "onCompletion: "+extra);
             switch (what) {
                 //case KSYVideoView.MEDIA_ERROR_UNKNOWN:
                 // Log.e(TAG, "OnErrorListener, Error Unknown:" + what + ",extra:" + extra);

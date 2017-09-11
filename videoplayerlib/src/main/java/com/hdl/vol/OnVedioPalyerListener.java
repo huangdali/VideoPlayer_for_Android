@@ -17,25 +17,30 @@ public interface OnVedioPalyerListener {
     void onPrepare(long total);
 
     /**
-     * 开始播放
+     * 播放
      */
     void onStartPaly();
 
     /**
-     * 播放出错了
+     * 播放出错
      * @param errorCode
      * @param errorMsg
      */
     void onError(int errorCode, Throwable errorMsg);
 
     /**
-     * 暂停了
+     * 暂停
      * @param currProgress
      */
     void onPuase(long currProgress);
 
     /**
-     * 停止了
+     * 停止
      */
     void onStop();
+
+    /**
+     * 播放完成
+     */
+    void onPlayFinished();
 }

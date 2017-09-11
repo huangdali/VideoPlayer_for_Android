@@ -21,7 +21,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private VedioPlayer vpPlayer;
-    private String url = "http://oss.cloudlinks.cn/video-123yun/1500541859093.m3u8?Expires=1503109645&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=Ucr3V5yqQYgkX8oZ%2F6uosYHgCGM%3D&x-oss-process=hls%2Fsign";
+    private String url = "http://oss.cloudlinks.cn/2222222_video-123yun/1504860794154.m3u8?Expires=1504952869&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=P0TJpZp9KldRtKaf2fveiSBvJ1g%3D&x-oss-process=hls%2Fsign";
     private ProgressDialog mProgressDialog;
     private SeekBar sbProgress;
     private ImageView ivScreen;
@@ -94,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStop() {
 
+            }
+
+            /**
+             * 播放完成
+             */
+            @Override
+            public void onPlayFinished() {
+                Log.e("hdltag", "onPlayFinished(MainActivity.java:104):播放完成了。。。。。。。。");
             }
         });
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
