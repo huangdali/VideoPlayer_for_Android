@@ -18,10 +18,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private VedioPlayer vpPlayer;
-    private String url = "http://oss.cloudlinks.cn/2222222_video-123yun/1505101831768.m3u8?Expires=1505204793&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=Lv%2FWlbxV1mMNiZuPTb3eQ3qVFUs%3D&x-oss-process=hls%2Fsign";
+    private String url = "http://oss.cloudlinks.cn/2222222_video-123yun/1505101831768.m3u8?Expires=1505271364&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=yzHEW3yEuzCrlcOYOxtdunV6jNM%3D&x-oss-process=hls%2Fsign";
     private ProgressDialog mProgressDialog;
     private SeekBar sbProgress;
     private ImageView ivScreen;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         mProgressDialog.setMessage("加载中...");
         vpPlayer = (VedioPlayer) findViewById(R.id.vp_player);
         vpPlayer.getTextureView().setBufferTimeMax(13.0f);
-        vpPlayer.getTextureView().setTimeout(5, 30);
+        vpPlayer.getTextureView().setTimeout(30, 60);
         vpPlayer.play(url, new OnVedioPalyerListener() {
             @Override
             public void onStart() {
@@ -104,6 +105,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPlayFinished() {
                 Log.e("hdltag", "onPlayFinished(MainActivity.java:104):播放完成了。。。。。。。。");
+            }
+
+            /**
+             * 播放中
+             *
+             * @param curBuffPercent
+             */
+            @Override
+            public void onPlaying(int curBuffPercent) {
+                Log.e("hdltag", "onPlaying(MainActivity.java:116):" + curBuffPercent);
             }
         });
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);

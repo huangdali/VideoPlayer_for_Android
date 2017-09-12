@@ -18,6 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+
 /**
  * 视频播放器
  * Created by HDL on 2017/7/28.
@@ -27,9 +28,10 @@ public class VedioPlayer extends LinearLayout {
     private static final String TAG = "VedioPlayer";
     private Context mContext;
     private KSYTextureView mTextureView;
-    private boolean isLooping = true;//是否循环播放
+    private boolean isLooping = false;//是否循环播放
     private boolean isPlaying = false;//是否正在播放
     private Timer timer;
+    private boolean isClickPlay = false;//是否点击过播放按钮了
     /**
      * 播放地址
      */
@@ -83,6 +85,7 @@ public class VedioPlayer extends LinearLayout {
      * 显示播放图标
      */
     public void showPlayIcon() {
+        isClickPlay = true;
         playSwitch.setVisibility(View.VISIBLE);
         playSwitch.setImageResource(R.mipmap.play);
         timer = new Timer();
@@ -201,6 +204,9 @@ public class VedioPlayer extends LinearLayout {
     public void reload(String url) {
         this.url = url;
         mTextureView.reload(url, true);
+        if (!isClickPlay) {
+            pausePlay();
+        }
     }
 
     /**
@@ -291,7 +297,9 @@ public class VedioPlayer extends LinearLayout {
         @Override
         public void onPrepared(IMediaPlayer mp) {
             Log.d(TAG, "OnPrepared");
-            onVedioPalyerListener.onPrepare(mp.getDuration());
+            if (onVedioPalyerListener != null) {
+                onVedioPalyerListener.onPrepare(mp.getDuration());
+            }
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -305,12 +313,18 @@ public class VedioPlayer extends LinearLayout {
             }, 500);
         }
     };
-
+    private long lastCurrentPosition = 0;
     private IMediaPlayer.OnBufferingUpdateListener mOnBufferingUpdateListener = new IMediaPlayer.OnBufferingUpdateListener() {
         @Override
         public void onBufferingUpdate(IMediaPlayer mp, int percent) {
-//            long duration = this.getDuration();
-//            long progress = duration * percent / 100;
+            if (percent > 1) {//第一段不算
+                if (lastCurrentPosition != mp.getCurrentPosition()) {
+                    lastCurrentPosition = mp.getCurrentPosition();
+                    if (onVedioPalyerListener != null && mTextureView != null && mTextureView.isPlaying()) {
+                        onVedioPalyerListener.onPlaying(percent);
+                    }
+                }
+            }
         }
     };
 
