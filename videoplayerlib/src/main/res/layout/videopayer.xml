@@ -12,10 +12,11 @@
         android:layout_height="match_parent"
         tools:targetApi="ice_cream_sandwich" />
 
-    <ImageView
+    <com.hdl.vol.MenuItemView
         android:id="@+id/iv_option_paly"
         android:layout_width="46dp"
         android:layout_height="46dp"
+        android:scaleType="fitXY"
         android:layout_centerInParent="true"
         android:src="@mipmap/pause" />
 

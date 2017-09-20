@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -16,7 +15,6 @@ import com.ksyun.media.player.KSYTextureView;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
 
 
 /**
@@ -30,15 +28,15 @@ public class VedioPlayer extends LinearLayout {
     private KSYTextureView mTextureView;
     private boolean isLooping = false;//是否循环播放
     private boolean isPlaying = false;//是否正在播放
-    private Timer timer;
     private boolean isClickPlay = false;//是否点击过播放按钮了
     /**
      * 播放地址
      */
     private String url;
-    private ImageView playSwitch;
+    //    private ImageView playSwitch;
     private RelativeLayout rlPlayer;
     private OnVedioPalyerListener onVedioPalyerListener;
+    private MenuItemView lampItem;
 
     public VedioPlayer(Context context) {
         this(context, null);
@@ -56,59 +54,24 @@ public class VedioPlayer extends LinearLayout {
         initView(view);
         initData();
     }
-
-    /**
-     * 更新播放状态
-     */
-    private void updatePlayState() {
-        if (isPlaying) {
-            startPlay();
-            showPlayIcon();
-        } else {
-            playSwitch.setImageResource(R.mipmap.pause);
-            pausePlay();
-        }
-    }
-
-    /**
-     * 显示暂停图标
-     */
-    public void showPuaseIcon() {
-        if (timer != null) {
-            timer.cancel();
-        }
-        playSwitch.setVisibility(View.VISIBLE);
-        playSwitch.setImageResource(R.mipmap.pause);
-    }
-
-    /**
-     * 显示播放图标
-     */
-    public void showPlayIcon() {
-        isClickPlay = true;
-        playSwitch.setVisibility(View.VISIBLE);
-        playSwitch.setImageResource(R.mipmap.play);
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                post(new Runnable() {
-                    @Override
-                    public void run() {
-                        playSwitch.setVisibility(View.INVISIBLE);
-                    }
-                });
-            }
-        }, 1500);
-    }
-
     private void initView(View view) {
-        playSwitch = (ImageView) view.findViewById(R.id.iv_option_paly);
-        playSwitch.setOnClickListener(new OnClickListener() {
+        lampItem = (MenuItemView) view.findViewById(R.id.iv_option_paly);
+        lampItem.buildSwitchLoaddingType(R.mipmap.pause, R.mipmap.pause, R.mipmap.play, R.mipmap.play, R.mipmap.loading);
+        lampItem.setFunType(MenuItemView.FunctionType.LAMP);
+        lampItem.setLoadding(true);
+        lampItem.setOnClickMenuItemViewListener(new MenuItemView.OnClickMenuItemViewListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(MenuItemView view) {
                 isPlaying = !isPlaying;
-                updatePlayState();
+                view.setOpen(isPlaying);
+                if (isPlaying) {
+                    startPlay();
+                } else {
+                    pausePlay();
+                }
+                if (onVideoClickListener != null) {
+                    onVideoClickListener.onClickPlayIcon(isPlaying);
+                }
             }
         });
         mTextureView = (KSYTextureView) view.findViewById(R.id.ksytv_player);
@@ -117,16 +80,9 @@ public class VedioPlayer extends LinearLayout {
             @Override
             public void onClick(View view) {
                 if (onVideoClickListener != null) {
-                    onVideoClickListener.onClick(isPlaying);
+                    onVideoClickListener.onClickVedioArea(isPlaying);
                 }
-                if (timer != null) {
-                    timer.cancel();
-                }
-                if (isPlaying) {
-                    showPlayIcon();
-                } else {
-                    showPuaseIcon();
-                }
+                lampItem.setVisibility(VISIBLE);
             }
         });
     }
@@ -138,7 +94,14 @@ public class VedioPlayer extends LinearLayout {
     }
 
     public interface OnVideoClickListener {
-        void onClick(boolean isPlaying);
+        void onClickVedioArea(boolean isPlaying);
+
+        /**
+         * 点击了播放控制图标
+         *
+         * @param isPlaying
+         */
+        void onClickPlayIcon(boolean isPlaying);
     }
 
     private void initData() {
@@ -163,7 +126,7 @@ public class VedioPlayer extends LinearLayout {
         if (onVedioPalyerListener != null) {
             onVedioPalyerListener.onStartPaly();
         }
-        showPlayIcon();
+        lampItem.setOpen(true);
     }
 
     /**
@@ -171,13 +134,14 @@ public class VedioPlayer extends LinearLayout {
      */
     public void pausePlay() {
         isPlaying = false;
+        lampItem.setOpen(isPlaying);
         if (mTextureView != null) {
             mTextureView.pause();
         }
         if (onVedioPalyerListener != null) {
             onVedioPalyerListener.onPuase(mTextureView.getCurrentPosition());
         }
-        showPuaseIcon();
+        lampItem.setOpen(false);
     }
 
     public void seekTo(long curProgress) {
@@ -203,9 +167,11 @@ public class VedioPlayer extends LinearLayout {
      */
     public void reload(String url) {
         this.url = url;
-        mTextureView.reload(url, true);
-        if (!isClickPlay) {
-            pausePlay();
+        lampItem.setLoadding(true);
+        isPlaying = false;
+        mTextureView.reload(url, false, KSYMediaPlayer.KSYReloadMode.KSY_RELOAD_MODE_FAST);
+        if (onVedioPalyerListener != null) {
+            onVedioPalyerListener.onReload();
         }
     }
 
@@ -278,7 +244,6 @@ public class VedioPlayer extends LinearLayout {
             mTextureView.release();
             mTextureView = null;
         }
-        showPuaseIcon();
     }
 
     public KSYTextureView getTextureView() {
@@ -306,6 +271,7 @@ public class VedioPlayer extends LinearLayout {
                     post(new Runnable() {
                         @Override
                         public void run() {
+                            lampItem.setOpen(false);
                             mTextureView.pause();
                         }
                     });
@@ -407,6 +373,11 @@ public class VedioPlayer extends LinearLayout {
                 case KSYMediaPlayer.MEDIA_INFO_RELOADED:
 //                    Toast.makeText(mContext, "Succeed to reload video.", Toast.LENGTH_SHORT).show();
 //                    Log.d(TAG, "Succeed to mPlayerReload video.");
+                    if (onVedioPalyerListener != null) {
+                        onVedioPalyerListener.onReloadSuccess();
+                    }
+                    isPlaying = true;
+                    lampItem.setOpen(isPlaying);
                     Log.e(TAG, "onInfo: 210");
                     return false;
             }

@@ -18,11 +18,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private VedioPlayer vpPlayer;
-    private String url = "http://oss.cloudlinks.cn/2222222_video-123yun/1505101831768.m3u8?Expires=1505271364&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=yzHEW3yEuzCrlcOYOxtdunV6jNM%3D&x-oss-process=hls%2Fsign";
+    private String url = "http://oss.cloudlinks.cn/07754326_2880011/1505751265076.m3u8?Expires=1505956082&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=9I3ViC9xuL0g9zvHfjekzRBi0m4%3D&x-oss-process=hls%2Fsign";
+    private String url1 = "http://oss.cloudlinks.cn/07754326_2880011/1505888773568.m3u8?Expires=1505981931&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=wt%2FYnX1SlVFVmX%2Ba%2Bi0p%2B5rKiKk%3D&x-oss-process=hls%2Fsign";
     private ProgressDialog mProgressDialog;
     private SeekBar sbProgress;
     private ImageView ivScreen;
@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         sbProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                Log.e(TAG, "onProgressChanged:" + seekBar.getProgress());
                 if (!isSeekToed) {
                     vpPlayer.seekTo(seekBar.getProgress());
                 }
@@ -64,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStart() {
                 mProgressDialog.show();
-                Log.e(TAG, "onStart: ");
+                Log.e("hdltag", "onStart(MainActivity.java:69):onStart");
             }
 
             @Override
             public void onPrepare(long total) {
                 sbProgress.setMax((int) total);
-                Log.e(TAG, "onPrepare: ");
+                Log.e("hdltag", "onPrepare(MainActivity.java:75):onPrepare");
                 mProgressDialog.dismiss();
             }
 
@@ -79,24 +78,24 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onStartPaly() {
-
+                Log.e("hdltag", "onStartPaly(MainActivity.java:84):onStartPaly");
             }
 
             @Override
             public void onError(int errorCode, Throwable errorMsg) {
-                Log.e(TAG, "onError: ");
+                Log.e("hdltag", "onError(MainActivity.java:89):" + errorCode + "\t" + errorMsg);
                 mProgressDialog.dismiss();
                 Toast.makeText(MainActivity.this, "视频url失效", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onPuase(long currProgress) {
-
+                Log.e("hdltag", "onPuase(MainActivity.java:96):暂停l");
             }
 
             @Override
             public void onStop() {
-
+                Log.e("hdltag", "onStop(MainActivity.java:101):onStop");
             }
 
             /**
@@ -114,7 +113,12 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onPlaying(int curBuffPercent) {
-                Log.e("hdltag", "onPlaying(MainActivity.java:116):" + curBuffPercent);
+                Log.e("hdltag", "onPlaying(MainActivity.java:119):" + curBuffPercent);
+            }
+
+            @Override
+            public void onReload() {
+                Log.e("hdltag", "onReload(MainActivity.java:124):reload");
             }
         });
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -177,6 +181,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStopPlay(View view) {
         vpPlayer.stopPlay();
+    }
+
+    public void onReload(View view) {
+        vpPlayer.reload(url1);
     }
 }
 

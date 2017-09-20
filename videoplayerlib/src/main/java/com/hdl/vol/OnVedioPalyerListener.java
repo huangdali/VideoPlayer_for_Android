@@ -52,4 +52,15 @@ public abstract class OnVedioPalyerListener {
      */
     public void onPlaying(int curBuffPercent) {
     }
+
+    /**
+     * 重新加载的时候回调
+     */
+    public void onReload() {
+    }
+    /**
+     * 重新加载成功的时候回调
+     */
+    public void onReloadSuccess() {
+    }
 }

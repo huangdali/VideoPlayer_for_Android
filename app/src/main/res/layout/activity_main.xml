@@ -66,6 +66,11 @@
             android:layout_height="wrap_content"
             android:onClick="onStopPlay"
             android:text="停止" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onReload"
+            android:text="切换" />
     </LinearLayout>
 
 
