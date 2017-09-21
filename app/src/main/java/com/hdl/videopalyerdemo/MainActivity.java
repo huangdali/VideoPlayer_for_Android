@@ -21,8 +21,8 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private VedioPlayer vpPlayer;
-    private String url = "http://oss.cloudlinks.cn/07754326_2880011/1505751265076.m3u8?Expires=1505956082&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=9I3ViC9xuL0g9zvHfjekzRBi0m4%3D&x-oss-process=hls%2Fsign";
-    private String url1 = "http://oss.cloudlinks.cn/07754326_2880011/1505888773568.m3u8?Expires=1505981931&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=wt%2FYnX1SlVFVmX%2Ba%2Bi0p%2B5rKiKk%3D&x-oss-process=hls%2Fsign";
+    private String url = "http://oss.cloudlinks.cn/07754326_2880011/1505963393462.m3u8?Expires=1506050741&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=3OMXqZFnW3ls%2BVAdmACt3CkDvf4%3D&x-oss-process=hls%2Fsign";
+    private String url1 = "http://oss.cloudlinks.cn/07754326_2880011/1505961374152.m3u8?Expires=1506050741&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=%2F5%2B0%2BOE34HJRzZ%2BwGEkK7b%2ByOKI%3D&x-oss-process=hls%2Fsign";
     private ProgressDialog mProgressDialog;
     private SeekBar sbProgress;
     private ImageView ivScreen;

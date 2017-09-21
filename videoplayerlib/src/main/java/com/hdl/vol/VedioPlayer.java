@@ -63,7 +63,6 @@ public class VedioPlayer extends LinearLayout {
             @Override
             public void onClick(MenuItemView view) {
                 isPlaying = !isPlaying;
-                view.setOpen(isPlaying);
                 if (isPlaying) {
                     startPlay();
                 } else {
@@ -129,6 +128,10 @@ public class VedioPlayer extends LinearLayout {
         lampItem.setOpen(true);
     }
 
+    public MenuItemView getLampItem() {
+        return lampItem;
+    }
+
     /**
      * 暂停播放
      */
@@ -141,7 +144,6 @@ public class VedioPlayer extends LinearLayout {
         if (onVedioPalyerListener != null) {
             onVedioPalyerListener.onPuase(mTextureView.getCurrentPosition());
         }
-        lampItem.setOpen(false);
     }
 
     public void seekTo(long curProgress) {
