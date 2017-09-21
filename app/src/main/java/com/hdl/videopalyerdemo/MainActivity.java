@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStartPaly() {
                 Log.e("hdltag", "onStartPaly(MainActivity.java:84):onStartPaly");
+                vpPlayer.pausePlay();
             }
 
             @Override

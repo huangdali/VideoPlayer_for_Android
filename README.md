@@ -17,7 +17,7 @@ android端网络视频点播播放器
 ### 引入：
 
 ```java
-compile 'com.jwkj:VideoPlayer:v1.1.5'
+compile 'com.jwkj:VideoPlayer:v1.1.9'
 ```
 
 ### 添加混淆：
@@ -99,9 +99,9 @@ compile 'com.jwkj:VideoPlayer:v1.1.5'
 
 ## 版本记录
 
-v1.1.9（ [2017.09.20]() ）
+v1.1.9（ [2017.09.21]() ）
 
-- 【新增】获取播放、暂停按钮MenuItemView
+- 【修复】当播放时立刻暂停会导致播放状态错乱
 
 v1.1.8（ [2017.09.20]() ）
 

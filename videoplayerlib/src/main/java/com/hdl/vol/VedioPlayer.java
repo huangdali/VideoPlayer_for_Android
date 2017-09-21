@@ -122,16 +122,11 @@ public class VedioPlayer extends LinearLayout {
      */
     public void startPlay() {
         mTextureView.start();
+        lampItem.setOpen(true);
         if (onVedioPalyerListener != null) {
             onVedioPalyerListener.onStartPaly();
         }
-        lampItem.setOpen(true);
     }
-
-    public MenuItemView getLampItem() {
-        return lampItem;
-    }
-
     /**
      * 暂停播放
      */
