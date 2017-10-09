@@ -21,8 +21,8 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private VedioPlayer vpPlayer;
-    private String url = "http://oss.cloudlinks.cn/07754326_2880011/1505963393462.m3u8?Expires=1506050741&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=3OMXqZFnW3ls%2BVAdmACt3CkDvf4%3D&x-oss-process=hls%2Fsign";
-    private String url1 = "http://oss.cloudlinks.cn/07754326_2880011/1505961374152.m3u8?Expires=1506050741&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=%2F5%2B0%2BOE34HJRzZ%2BwGEkK7b%2ByOKI%3D&x-oss-process=hls%2Fsign";
+    private String url = "http://oss.cloudlinks.cn/011862167_2880011/1506614400147.m3u8?Expires=1507607031&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=JpYusxmJ%2Fb5du%2Fh679%2Fu0v2iMos%3D&x-oss-process=hls%2Fsign";
+    private String url1 = "http://oss.cloudlinks.cn/011862167_2880011/1506614400147.m3u8?Expires=1507607031&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=JpYusxmJ%2Fb5du%2Fh679%2Fu0v2iMos%3D&x-oss-process=hls%2Fsign";
     private ProgressDialog mProgressDialog;
     private SeekBar sbProgress;
     private ImageView ivScreen;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStartPaly() {
                 Log.e("hdltag", "onStartPaly(MainActivity.java:84):onStartPaly");
-                vpPlayer.pausePlay();
+//                vpPlayer.pausePlay();
             }
 
             @Override

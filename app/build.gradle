@@ -26,4 +26,5 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile project(':videoplayerlib')
+    compile 'com.hdl:elog:v2.0.2'
 }

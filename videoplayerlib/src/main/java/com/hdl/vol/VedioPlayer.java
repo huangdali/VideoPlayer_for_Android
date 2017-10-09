@@ -82,6 +82,7 @@ public class VedioPlayer extends LinearLayout {
                     onVideoClickListener.onClickVedioArea(isPlaying);
                 }
                 lampItem.setVisibility(VISIBLE);
+                lampItem.setOpen(isPlaying);
             }
         });
     }

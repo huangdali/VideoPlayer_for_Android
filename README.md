@@ -17,7 +17,7 @@ android端网络视频点播播放器
 ### 引入：
 
 ```java
-compile 'com.jwkj:VideoPlayer:v2.0.1'
+compile 'com.jwkj:VideoPlayer:v2.0.2'
 ```
 
 ### 添加混淆：
@@ -98,6 +98,10 @@ compile 'com.jwkj:VideoPlayer:v2.0.1'
 ```
 
 ## 版本记录
+
+v2.0.2（ [2017.10.09]() ）
+
+- 【修复】当正在播放视频，点击播放区域时，2秒之后播放按钮不会自动隐藏
 
 v2.0.1（ [2017.10.09]() ）
 
