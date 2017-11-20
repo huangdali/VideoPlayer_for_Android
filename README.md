@@ -7,7 +7,7 @@ android端网络视频点播播放器
 - 提供reload方法
 
 
->基于 [金山云点播播放器](https://github.com/ksvc/KSYMediaPlayer_Android) 修改而来，仅仅做学习使用，请勿用于生产环境
+>基于 [金山云点播播放器](https://github.com/ksvc/KSYMediaPlayer_Android) 修改而来
 
 ### 效果图
 
