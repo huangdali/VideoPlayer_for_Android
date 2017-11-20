@@ -79,10 +79,10 @@ public class VedioPlayer extends LinearLayout {
             @Override
             public void onClick(View view) {
                 if (onVideoClickListener != null) {
-                    onVideoClickListener.onClickVedioArea(isPlaying);
+                    onVideoClickListener.onClickVedioArea(mTextureView.isPlaying());
                 }
                 lampItem.setVisibility(VISIBLE);
-                lampItem.setOpen(isPlaying);
+                lampItem.setOpen(mTextureView.isPlaying());
             }
         });
     }

@@ -261,7 +261,7 @@ public class MenuItemView extends android.support.v7.widget.AppCompatImageView i
      * @param open
      */
     public void setOpen(boolean open) {
-        this.isLoadding = false;//调用setchecked说明已经有结果了，就不在加载了
+        this.isLoadding = false;//调用setOpen说明已经有结果了，就不在加载了
         this.isOpen = open;
         if (isOpen) {
             if (hideTimer != null) {

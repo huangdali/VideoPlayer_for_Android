@@ -21,8 +21,8 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private VedioPlayer vpPlayer;
-    private String url = "http://oss.cloudlinks.cn/011862167_2880011/1506614400147.m3u8?Expires=1507607031&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=JpYusxmJ%2Fb5du%2Fh679%2Fu0v2iMos%3D&x-oss-process=hls%2Fsign";
-    private String url1 = "http://oss.cloudlinks.cn/011862167_2880011/1506614400147.m3u8?Expires=1507607031&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=JpYusxmJ%2Fb5du%2Fh679%2Fu0v2iMos%3D&x-oss-process=hls%2Fsign";
+    private String url = "http://oss.cloudlinks.cn/011862167_2880011_1001/1511107202793.m3u8?Expires=1511226608&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=3Fi3KOx3nyA9bLPQcPcKCmlFupk%3D&x-oss-process=hls%2Fsign";
+    private String url1 = "http://oss.cloudlinks.cn/011862167_2880011_1001/1511107202793.m3u8?Expires=1511226608&OSSAccessKeyId=LTAIAxqhixFoJsvp&Signature=3Fi3KOx3nyA9bLPQcPcKCmlFupk%3D&x-oss-process=hls%2Fsign";
     private ProgressDialog mProgressDialog;
     private SeekBar sbProgress;
     private ImageView ivScreen;
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onPlaying(int curBuffPercent) {
-                Log.e("hdltag", "onPlaying(MainActivity.java:119):" + curBuffPercent);
+//                Log.e("hdltag", "onPlaying(MainActivity.java:119):" + curBuffPercent);
             }
 
             @Override
