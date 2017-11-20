@@ -5,6 +5,8 @@ android端网络视频点播播放器
 - 带截图功能
 - 可后台播放
 - 提供reload方法
+- 页面切换再回到视频页面时不黑屏
+- 已经实现播放/暂停按钮
 
 
 >基于 [金山云点播播放器](https://github.com/ksvc/KSYMediaPlayer_Android) 修改而来
