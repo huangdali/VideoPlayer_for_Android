@@ -13,8 +13,6 @@ import com.ksyun.media.player.KSYMediaPlayer;
 import com.ksyun.media.player.KSYTextureView;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
@@ -263,18 +261,19 @@ public class VedioPlayer extends LinearLayout {
             if (onVedioPalyerListener != null) {
                 onVedioPalyerListener.onPrepare(mp.getDuration());
             }
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    post(new Runnable() {
-                        @Override
-                        public void run() {
+//
+//            new Timer().schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    post(new Runnable() {
+//                        @Override
+//                        public void run() {
                             lampItem.setOpen(false);
                             mTextureView.pause();
-                        }
-                    });
-                }
-            }, 500);
+//                        }
+//                    });
+//                }
+//            }, 10);
         }
     };
     private long lastCurrentPosition = 0;
