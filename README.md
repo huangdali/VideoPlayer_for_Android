@@ -19,7 +19,7 @@ android端网络视频点播播放器
 ### 引入：
 
 ```java
-compile 'com.jwkj:VideoPlayer:v2.0.3'
+compile 'com.jwkj:VideoPlayer:v2.0.8'
 ```
 
 ### 添加混淆：
@@ -101,7 +101,11 @@ compile 'com.jwkj:VideoPlayer:v2.0.3'
 
 ## 版本记录
 
-v2.0.4（ [2018.01.09]() ）
+v2.0.8（ [2018.03.14]() ）
+
+- 【优化】seekto超过duration时跳转到结束时间
+
+v2.0.5（ [2018.01.09]() ）
 
 - 【优化】第一次播放可能加载不出第一帧
 

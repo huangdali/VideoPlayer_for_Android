@@ -54,6 +54,7 @@ public class VedioPlayer extends LinearLayout {
         initView(view);
         initData();
     }
+
     private void initView(View view) {
         lampItem = (MenuItemView) view.findViewById(R.id.iv_option_paly);
         lampItem.buildSwitchLoaddingType(R.mipmap.pause, R.mipmap.pause, R.mipmap.play, R.mipmap.play, R.mipmap.loading);
@@ -63,13 +64,13 @@ public class VedioPlayer extends LinearLayout {
             @Override
             public void onClick(MenuItemView view) {
                 isPlaying = !isPlaying;
+                if (onVideoClickListener != null) {
+                    onVideoClickListener.onClickPlayIcon(isPlaying);
+                }
                 if (isPlaying) {
                     startPlay();
                 } else {
                     pausePlay();
-                }
-                if (onVideoClickListener != null) {
-                    onVideoClickListener.onClickPlayIcon(isPlaying);
                 }
             }
         });
@@ -128,6 +129,7 @@ public class VedioPlayer extends LinearLayout {
             onVedioPalyerListener.onStartPaly();
         }
     }
+
     /**
      * 暂停播放
      */
@@ -143,10 +145,13 @@ public class VedioPlayer extends LinearLayout {
     }
 
     public void seekTo(long curProgress) {
-        if (curProgress < 0 || curProgress > mTextureView.getDuration()) {
+        if (curProgress < 0) {
+            return;
+        } else if (curProgress > mTextureView.getDuration()) {
+            mTextureView.seekTo(mTextureView.getDuration() - 1000, true);
             return;
         }
-        mTextureView.seekTo(curProgress);
+        mTextureView.seekTo(curProgress, true);
     }
 
     /**
